@@ -28,7 +28,7 @@
 </head>
 <body>
     <div class="window">
-        <div class="banner">
+        <div class="banner" style="box-sizing: border-box;">
             <div class="banner_name" style="flex-grow:1;">
                 <h1 class="poppins-medium">
                         
@@ -36,9 +36,9 @@
                 </h1>
             </div>
 
-            <div class="banner_button" style="width:fit-content;">
-                <md-icon-button>
-                <md-icon>check</md-icon>
+            <div class="banner_button">
+                <md-icon-button href="./read.php" target="_self">
+                <md-icon>analytics</md-icon>
                 </md-icon-button>
             </div>
         </div>
@@ -54,16 +54,16 @@
                         この度はドローンデモ会にご関心をお寄せいただき、ありがとうございます。
                         <br>本アンケートは、皆様のご意見やご要望を把握し、より充実したイベントを開催するためにご協力をお願いしております。<br>アンケートのご回答にかかる時間は約5分です。
                         </p>
-                        <p>1. ご氏名をを教えてください</p>
+                        <p>1. ご氏名をを教えてください*</p>
                         <md-filled-text-field label="ご氏名" required name="name"></md-filled-text-field>
                         
-                        <p>2. ご連絡先メールアドレスを教えてください。</p>
-                        <md-filled-text-field label="メールアドレス" required name="email" placeholder="email@domain.com" pattern="[\w\d-]+"></md-filled-text-field>
-                        <p>3. ご住所を教えてください。</p>
+                        <p>2. ご連絡先メールアドレスを教えてください。*</p>
+                        <md-filled-text-field label="メールアドレス" required name="email" placeholder="email@domain.com" pattern="[\w-]+"></md-filled-text-field>
+                        <p>3. ご住所を教えてください。*</p>
                         <md-filled-text-field label="郵便番号" required prefix-text="〒" name="postcode" maxlength="7" supporting-text="ハイフン (-)なしの7桁の郵便番号をご入力ください。"></md-filled-text-field>
                         <br>
                         <md-filled-text-field label="ご住所" required name="address" type="textarea" style="width=400px;resize: none;" rows="3" cols="50"></md-filled-text-field>
-                        <p>4. 現在の職業を教えてください。</p>
+                        <p>4. 現在の職業を教えてください。*</p>
                         <md-filled-select label="職業" required name="occupation">
                             <md-select-option value="経営者">
                                 <div slot="headline">経営者</div>
@@ -86,14 +86,17 @@
                             <md-select-option value="定年退職">
                                 <div slot="headline">定年退職</div>
                             </md-select-option>
+                            <md-select-option value="その他">
+                                <div slot="headline">その他</div>
+                            </md-select-option>
                         </md-filled-select>
 
-                        <p>5. ドローンの操作経験はありますか？</p>
-                        <p><md-radio id="no" name="exp" value="no"></md-radio>
+                        <p>5. ドローンの操作経験はありますか？*</p>
+                        <p><md-radio id="no" name="exp" value="ない" required></md-radio>
                         <label for="no">ない</label></p>
-                        <p><md-radio id="little" name="exp" value="little"></md-radio>
+                        <p><md-radio id="little" name="exp" value="少しある" required></md-radio>
                         <label for="little">少しある</label></p>
-                        <p><md-radio id="lot" name="exp" value="lot"></md-radio>
+                        <p><md-radio id="lot" name="exp" value="かなりある" required></md-radio>
                         <label for="lot">かなりある</label></p>
 
                         <p>6. デモ会に参加する目的を教えてください。（複数選択可）</p>
@@ -128,11 +131,11 @@
                         <p><md-checkbox id="質疑応答・ディスカッション" touch-target="wrapper" name="interest[]" value="質疑応答・ディスカッション"></md-checkbox>
                         <label for="質疑応答・ディスカッション">質疑応答・ディスカッション</label></p>
 
-                        <p>9. ドローンに関する今後のイベントやセミナーの情報を受け取りたいですか？</p>
-                        <p><md-radio id="yes" name="info" value="yes"></md-radio>
-                        <label for="yes">受け取る</label></p>
-                        <p><md-radio id="no" name="info" value="no"></md-radio>
-                        <label for="no">受け取らない</label></p>
+                        <p>9. ドローンに関する今後のイベントやセミナーの情報を受け取りたいですか？*</p>
+                        <p><md-radio id="受け取る" name="info" value="受け取る" required></md-radio>
+                        <label for="受け取る">受け取る</label></p>
+                        <p><md-radio id="受け取らない" name="info" value="受け取らない" required></md-radio>
+                        <label for="受け取らない">受け取らない</label></p>
                         <p>10. 何かご意見やご要望があれば教えてください。</p>
                         <md-filled-text-field label="ご意見・ご要望"  name="comments" type="textarea" style="resize: none;" rows="6" cols="100"></md-filled-text-field>
                         <p>
