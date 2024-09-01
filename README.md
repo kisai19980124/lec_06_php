@@ -10,7 +10,9 @@
 ## DEMO
 https://gsacademy-ki.sakura.ne.jp/lec_07_php/write.php (アンケート記入ページ)
 https://gsacademy-ki.sakura.ne.jp/lec_07_php/read.php (アンケート結果閲覧ページ)
+
 ↓ページ右上にあるボタンで切替可能
+
 ![image](https://github.com/user-attachments/assets/71198247-939c-4ed3-8332-bdd5d238b2de)
 
 
