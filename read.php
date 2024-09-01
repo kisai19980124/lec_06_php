@@ -21,7 +21,7 @@
     $count_purpose = countOptions($options_purpose,array_column($data,8));
     $count_field = countOptions($options_field, array_column($data,9));
     $count_interest = countOptions($options_interest,array_column($data,10));
-
+    $count_postcode =countPrefectures(array_column($data,2));
     $colors = ["#F44336","#2196F3","#009688","#FFEB3B","#FF5722","#795548","#673AB7","#00BCD4","#FF9800","#8BC34A"]
 
     
@@ -79,7 +79,7 @@
                        ドローンデモ会 参加アンケート アンケート結果
                     </h1>
                     <p>3. ご住所を教えてください。*</p>
-                    <div id="chartdiv"></div>
+                    <div class="canvas-container" id="mapdiv"></div>
                     <p>4. 現在の職業を教えてください。*</p>
                     <div class="canvas-container">
                         <canvas id="OccupationChart"></canvas>
@@ -114,6 +114,7 @@
     
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     function PieChart(chartid,options,counts) {
         var ctx = document.getElementById(chartid);
@@ -178,5 +179,20 @@
     BarChart("InterestChart",<?php echo json_encode($options_interest); ?>,<?php echo json_encode($count_interest); ?>);
     PieChart("InfoChart",<?php echo json_encode($options_info); ?>,<?php echo json_encode($count_info); ?>);
 </script>
+<script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
 
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable(<?php echo json_encode($count_postcode); ?>);
+
+        var options = {region: 'JP',resolution: "provinces"};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('mapdiv'));
+
+        chart.draw(data, options);
+      }
+    </script>
 </html>

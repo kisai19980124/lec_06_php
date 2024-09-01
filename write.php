@@ -60,9 +60,9 @@
                         <p>2. ご連絡先メールアドレスを教えてください。*</p>
                         <md-filled-text-field label="メールアドレス" required name="email" placeholder="email@domain.com" pattern="[\w-]+"></md-filled-text-field>
                         <p>3. ご住所を教えてください。*</p>
-                        <md-filled-text-field label="郵便番号" required prefix-text="〒" name="postcode" maxlength="7" supporting-text="ハイフン (-)なしの7桁の郵便番号をご入力ください。"></md-filled-text-field>
+                        <md-filled-text-field label="郵便番号" required prefix-text="〒" name="postcode" maxlength="7" supporting-text="ハイフン (-)なしの7桁の郵便番号をご入力ください。" id="postcode"></md-filled-text-field>
                         <br>
-                        <md-filled-text-field label="ご住所" required name="address" type="textarea" style="width=400px;resize: none;" rows="3" cols="50"></md-filled-text-field>
+                        <md-filled-text-field label="ご住所" required name="address" type="textarea" style="width=400px;resize: none;" rows="3" cols="50" id="address"></md-filled-text-field>
                         <p>4. 現在の職業を教えてください。*</p>
                         <md-filled-select label="職業" required name="occupation">
                             <md-select-option value="経営者">
@@ -153,6 +153,32 @@
 
         </div>
     </div>
-    
+
+    <script>
+        document.getElementById('postcode').addEventListener('input', function() {
+            const postcode = this.value;
+            if (postcode.length === 7 && /^\d{7}$/.test(postcode)) {
+                // Make the API request
+                fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postcode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 200 && data.results) {
+                            const result = data.results[0];
+                            const fullAddress = result.address1 + result.address2 + result.address3;
+
+                            // Prepend the address to the textarea
+                            const addressTextarea = document.getElementById('address');
+                            addressTextarea.value = fullAddress ;//+ '\n' + addressTextarea.value
+                        } else {
+                            alert('Address not found or invalid postcode.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching address:', error);
+                    });
+            }
+        });
+    </script>
 </body>
+
 </html>
